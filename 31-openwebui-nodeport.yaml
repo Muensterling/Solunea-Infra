@@ -8,8 +8,9 @@ spec:
   selector:
     app: open-webui
   ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-      nodePort: 30089
+  - name: http
+    port: 80
+    targetPort: 8080
+    nodePort: 30089
+
 
