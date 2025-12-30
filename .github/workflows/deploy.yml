@@ -1,0 +1,20 @@
+name: Deploy Solunea (K3s)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply manifests
+        run: |
+          set -e
+          export KUBECONFIG=/home/gha/.kube/config
+          k3s kubectl apply -f .
+          k3s kubectl -n solunea get pods
+          k3s kubectl -n solunea get svc
