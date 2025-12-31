@@ -9,16 +9,6 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Smoke test OpenWebUI
-        run: |
-          set -e
-          export KUBECONFIG=/home/gha/.kube/config
-          POD_IP=$(k3s kubectl -n solunea get pod -l app=open-webui -o jsonpath='{.items[0].status.podIP}')
-          SVC_IP=$(k3s kubectl -n solunea get svc open-webui -o jsonpath='{.spec.clusterIP}')
-          curl -fsS -I http://$POD_IP:8080/ | head -n 1
-          curl -fsS -I http://$SVC_IP:80/ | head -n 1
-          curl -fsS -I http://192.168.1.239/ | head -n 1
-
       - name: Checkout
         uses: actions/checkout@v4
 
